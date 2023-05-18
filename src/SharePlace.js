@@ -39,9 +39,7 @@ class PlaceFinder {
     }
     this.shareBtn.disabled = false;
     const sharedLinkInputElement = document.getElementById('share-link');
-    sharedLinkInputElement.value = `${
-      location.origin
-    }/my-place?address=${encodeURI(address)}&point=${coordinates.lat,coordinates.lang}`;
+    sharedLinkInputElement.value = `${location.origin}/my-place?address=${encodeURI(address)}&lat=${coordinates.latitude}&lng=${coordinates.longitude}`;
   }
 
   locateUserHandler() {
@@ -56,14 +54,15 @@ class PlaceFinder {
       'Loading location - please wait!'
     );
     modal.show();
+
     navigator.geolocation.getCurrentPosition(
       async (successResult) => {
         const coordinates = {
-          lat: successResult.coords.latitude,
-          lng: successResult.coords.longitude,
+          latitude: successResult.coords.latitude,
+          longitude: successResult.coords.longitude,
         };
 
-        console.log('Latitude:', coordinates.lat);
+        console.log('Latitude:', coordinates.latitude);
 
         const address = await getAddressFromCoords(coordinates);
         modal.hide();

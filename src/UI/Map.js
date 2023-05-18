@@ -20,6 +20,7 @@ export class Map {
       position: coordinates,
       map: map,
       color: 'red',
+      
     });
 
     map.entities.push(pin);

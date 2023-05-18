@@ -11,8 +11,8 @@ class LoadedPlace {
 const url = new URL(location.href);
 const queryParams = url.searchParams;
 const coords = {
-  lat: parseFloat(queryParams.get('lat')),
-  lng: +queryParams.get('lng')
+  latitude: parseFloat(queryParams.get('lat')),
+  longitude: +queryParams.get('lng'),
 };
 const address = queryParams.get('address');
 new LoadedPlace(coords, address);
