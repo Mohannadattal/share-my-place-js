@@ -1,4 +1,26 @@
-const BING_API_KEY = 'Au5Ue79FIOd-G1nbMQIQEjeT6h_VUteohg4nrHLIv2n1ZGXFdM9tINR5ct_jUclk';
+
+const BING_API_KEY =
+  'Au5Ue79FIOd-G1nbMQIQEjeT6h_VUteohg4nrHLIv2n1ZGXFdM9tINR5ct_jUclk';
+
+export async function getAddressFromCoords(coords) {
+  const response = await fetch(
+    `https://dev.virtualearth.net/REST/v1/Locations/point=${coords.lat},${coords.lng}?key=${BING_API_KEY}`
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch Address. Please try again!');
+  }
+
+  const data = await response.json();
+
+  if (data.errorDetails) {
+    throw new Error(data.errorDetails[0]);
+  }
+
+  const address = data.resourceSets[0].resources[0].address.formattedAddress;
+  return address;
+}
+
 
 export async function getCoordsFromAddress(address) {
   const urlAddress = encodeURI(address);
@@ -29,6 +51,6 @@ export async function getCoordsFromAddress(address) {
   const coordinates = resources[0].point.coordinates;
   return {
     latitude: coordinates[0],
-    longitude: coordinates[1]
+    longitude: coordinates[1],
   };
 }
