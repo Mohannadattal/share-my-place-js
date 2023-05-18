@@ -1,6 +1,6 @@
 export class Map {
   constructor(coords) {
-   // this.coordinates = coords;
+    // this.coordinates = coords;
     this.render(coords);
   }
 
@@ -14,13 +14,12 @@ export class Map {
       zoom: 16,
     });
 
-    const center = map.getCenter()
+    const center = map.getCenter();
 
-   const pin = new Microsoft.Maps.Pushpin(center,{
+    const pin = new Microsoft.Maps.Pushpin(center, {
       position: coordinates,
       map: map,
-      color:'red'
-
+      color: 'red',
     });
 
     map.entities.push(pin);
